@@ -1,0 +1,16 @@
+
+Main:
+	prompt for user input to spin	
+		
+
+	Random function:
+		each spin catagory should not be calculated independently ie |x|x|x| -> one roll
+		should not be true random, should have expected odds that can be set for each level of award
+			Implementation: use rand() for small ranges, use mt19937 to generate unobservable patterns 
+		can include mercy function where after certain amt of rolls -> odds increased
+
+
+	Output function:
+		display a random catagory roll if did not win ie |x|y|z|
+		if win display winning combo based on roll
+		
