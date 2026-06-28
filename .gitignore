@@ -2,3 +2,6 @@
 *.o
 /slot
 *.exe
+
+# Local-only files (not shared)
+/CLAUDE.md
