@@ -1,10 +1,9 @@
-#include <iostream>
-//#include "ran.cpp"
-#include "display.cpp"
+#include "game.h"
+#include "rng.h"
 
-int main(){
-
-    output();
-
+int main() {
+    slot::Rng rng;
+    slot::Game game(rng);
+    game.run();
     return 0;
 }
