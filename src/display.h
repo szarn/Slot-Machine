@@ -19,6 +19,9 @@ public:
 
     void welcome(long costPerRoll, long lineBet) const;
 
+    // Show the player's running total (net, with spent/won breakdown) before a roll.
+    void showRunningTotal(const Wallet& wallet) const;
+
     // Animate the reels streaming and settling, reel by reel, onto `result`.
     void animateSpin(const Grid& result) const;
 

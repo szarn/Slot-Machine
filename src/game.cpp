@@ -15,7 +15,7 @@ long Game::lineBet() const {
 }
 
 bool Game::promptRoll() const {
-    std::cout << "\n" << "Press [Enter] to roll ($" << kCostPerRoll
+    std::cout << "  Press [Enter] to roll ($" << kCostPerRoll
               << "), or type q to quit: " << std::flush;
     std::string input;
     if (!std::getline(std::cin, input)) return false; // EOF / stream closed
@@ -25,7 +25,10 @@ bool Game::promptRoll() const {
 void Game::run() {
     display_.welcome(kCostPerRoll, lineBet());
 
-    while (promptRoll()) {
+    while (true) {
+        display_.showRunningTotal(wallet_); // current total is visible before each spin
+        if (!promptRoll()) break;
+
         wallet_.spend(kCostPerRoll);
 
         const Grid grid = machine_.spin(rng_);

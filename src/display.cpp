@@ -114,6 +114,15 @@ void Display::showLoss() const {
     std::cout << "\n  " << kDim << u8"— no win this spin —" << kReset << "\n";
 }
 
+void Display::showRunningTotal(const Wallet& wallet) const {
+    const long net = wallet.net();
+    const char* netColor = (net >= 0) ? kGreen : kRed;
+    const char* sign = (net >= 0) ? "+" : "-";
+    std::cout << "\n  " << kBold << "Total: " << netColor << sign << "$" << std::abs(net)
+              << kReset << kDim << "   (spent $" << wallet.spent()
+              << " · won $" << wallet.won() << ")" << kReset << "\n";
+}
+
 void Display::welcome(long costPerRoll, long lineBet) const {
     std::cout << "\033[2J\033[H"; // clear screen, cursor home
     std::cout << kCyan << kBold

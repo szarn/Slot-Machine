@@ -93,12 +93,12 @@ appear less often and pay more.
 
 | Symbol       | Rarity      | 3 in a row | 4 in a row | 5 in a row |
 | ------------ | ----------- | ---------- | ---------- | ---------- |
-| 🍒 Cherry    | most common | $4         | $10        | $20        |
-| 🍋 Lemon     | common      | $6         | $16        | $40        |
-| 🔔 Bell      | uncommon    | $10        | $30        | $80        |
-| ⭐ Star       | rare        | $20        | $60        | $160       |
-| 💎 Diamond   | very rare   | $40        | $120       | $300       |
-| 💰 Jackpot   | rarest      | $100       | $400       | **$1,000** |
+| 🍒 Cherry    | most common | $10        | $30        | $80        |
+| 🍋 Lemon     | common      | $16        | $50        | $150       |
+| 🔔 Bell      | uncommon    | $30        | $100       | $300       |
+| ⭐ Star       | rare        | $60        | $200       | $600       |
+| 💎 Diamond   | very rare   | $120       | $400       | $1,500     |
+| 💰 Jackpot   | rarest      | $300       | $1,000     | **$5,000** |
 
 Wins on multiple paylines in the same spin stack — the top prize is five
 💰 Jackpots on every line at once.
