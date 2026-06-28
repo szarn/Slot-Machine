@@ -106,21 +106,27 @@ Wins on multiple paylines in the same spin stack — the top prize is five
 ## Project Structure
 
 The code is conventional C++: each module is a `.h`/`.cpp` pair, separately
-compiled and linked. Everything lives in `namespace slot`, and dependencies flow
-one way — the game logic knows nothing about how it's drawn.
+compiled and linked. All sources live in `src/`; everything is in
+`namespace slot`, and dependencies flow one way — the game logic knows nothing
+about how it's drawn.
 
-| File                       | Responsibility                                                        |
-| -------------------------- | --------------------------------------------------------------------- |
-| `symbol.{h,cpp}`           | Symbol set + paytable: glyphs, names, reel weights, payout multipliers |
-| `rng.{h,cpp}`              | `Rng` — a single Mersenne Twister engine, seeded once                  |
-| `machine.{h,cpp}`          | `Grid` type and `SlotMachine::spin` (weighted draws)                   |
-| `paylines.{h,cpp}`         | The payline set and `evaluate()` (scores winning lines)                |
-| `wallet.{h,cpp}`           | Running session totals (spent / won / net)                             |
-| `display.{h,cpp}`          | All terminal output: animation, win banner, summary (ANSI codes)       |
-| `game.{h,cpp}`             | `Game` — the play loop tying model and view together                   |
-| `main.cpp`                 | Entry point: construct the RNG and game, run                           |
-| `Makefile`                 | Build configuration                                                    |
-| `DesignProcess.txt`        | Original design brief and notes                                        |
+```
+.
+├── src/                  # all C++ sources and headers
+│   ├── main.cpp          Entry point: construct the RNG and game, run
+│   ├── symbol.{h,cpp}    Symbol set + paytable: glyphs, weights, payout multipliers
+│   ├── rng.{h,cpp}       Rng — a single Mersenne Twister engine, seeded once
+│   ├── machine.{h,cpp}   Grid type and SlotMachine::spin (weighted draws)
+│   ├── paylines.{h,cpp}  The payline set and evaluate() (scores winning lines)
+│   ├── wallet.{h,cpp}    Running session totals (spent / won / net)
+│   ├── display.{h,cpp}   All terminal output: animation, win banner, summary
+│   └── game.{h,cpp}      Game — the play loop tying model and view together
+├── docs/
+│   └── DesignProcess.txt Original design brief and notes
+├── Makefile
+├── README.md
+└── CLAUDE.md
+```
 
 ## Testing
 
@@ -128,7 +134,7 @@ The core logic is engine-free and easy to test in isolation. Compile a small
 driver against the relevant sources — for example, to test payline scoring:
 
 ```sh
-c++ -std=c++17 -I. mytest.cpp symbol.cpp paylines.cpp -o mytest && ./mytest
+c++ -std=c++17 -Isrc mytest.cpp src/symbol.cpp src/paylines.cpp -o mytest && ./mytest
 ```
 
 Construct a `Grid`, call `evaluate(grid, lineBet)`, and assert on the returned
@@ -144,4 +150,4 @@ deterministic for reproducible tests.
   borders are sized to match. Substituting symbols of a different width will
   misalign the grid.
 - A **"mercy" mechanic** (raising win odds after a losing streak), sketched in
-  `DesignProcess.txt`, is noted but not yet implemented.
+  `docs/DesignProcess.txt`, is noted but not yet implemented.

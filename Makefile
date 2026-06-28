@@ -1,10 +1,11 @@
 CXX      := c++
 CXXFLAGS := -std=c++17 -Wall -Wextra -O2
 BIN      := slot
+SRCDIR   := src
 
-SRC := main.cpp symbol.cpp rng.cpp machine.cpp paylines.cpp wallet.cpp display.cpp game.cpp
+SRC := $(wildcard $(SRCDIR)/*.cpp)
 OBJ := $(SRC:.cpp=.o)
-HDR := $(wildcard *.h)
+HDR := $(wildcard $(SRCDIR)/*.h)
 
 .PHONY: all run clean
 
@@ -15,7 +16,7 @@ $(BIN): $(OBJ)
 
 # Recompile any object when its source or any header changes (simple, safe for
 # a project this size).
-%.o: %.cpp $(HDR)
+$(SRCDIR)/%.o: $(SRCDIR)/%.cpp $(HDR)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 run: $(BIN)

@@ -23,15 +23,16 @@ interactive (reads stdin); for a non-interactive smoke test, pipe input:
 
 There is no test framework wired into the Makefile. Core logic is engine-free and
 easy to test directly: compile a small driver against the relevant `.cpp` files,
-e.g. `c++ -std=c++17 -I. mytest.cpp symbol.cpp paylines.cpp -o mytest`. The most
-valuable target is `evaluate()` in `paylines.cpp` — construct a `Grid`, call it
-with a known `lineBet`, and assert on the returned `LineWin`s.
+e.g. `c++ -std=c++17 -Isrc mytest.cpp src/symbol.cpp src/paylines.cpp -o mytest`.
+The most valuable target is `evaluate()` in `src/paylines.cpp` — construct a
+`Grid`, call it with a known `lineBet`, and assert on the returned `LineWin`s.
 
 ## Architecture
 
-Conventional C++: each module is a `.h`/`.cpp` pair, separately compiled and
-linked (see the Makefile). Everything lives in `namespace slot`. Dependencies flow
-one direction — the model knows nothing about rendering:
+Conventional C++: each module is a `.h`/`.cpp` pair under `src/`, separately
+compiled and linked (see the Makefile); docs live in `docs/`. Everything lives in
+`namespace slot`. Dependencies flow one direction — the model knows nothing about
+rendering:
 
 - **`symbol`** — `enum class Symbol` plus the static paytable: each symbol's glyph,
   name, reel **weight**, and 3×/4×/5× payout multipliers. Rarer symbols (lower
@@ -65,5 +66,5 @@ one direction — the model knows nothing about rendering:
 - **Symbols are emoji** rendered assuming a display width of 2 columns; the grid
   borders are sized to match. Swapping in symbols of a different width will
   misalign the grid.
-- `DesignProcess.txt` holds the original brief (weighted/non-uniform odds, an
+- `docs/DesignProcess.txt` holds the original brief (weighted/non-uniform odds, an
   unimplemented "mercy" mechanic that raises odds after losing streaks).
